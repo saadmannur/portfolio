@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="Nur Uddin Portfolio">
+  <rect width="32" height="32" rx="7" fill="#0f172a"/>
+  <rect x="1" y="1" width="30" height="30" rx="6" fill="none" stroke="#38bdf8" stroke-opacity="0.35" stroke-width="0.75"/>
+  <defs>
+    <linearGradient id="brand" x1="6" y1="6" x2="26" y2="26" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#38bdf8"/>
+      <stop offset="1" stop-color="#8b5cf6"/>
+    </linearGradient>
+  </defs>
+  <text
+    x="16"
+    y="21"
+    fill="url(#brand)"
+    font-family="Segoe UI, system-ui, -apple-system, sans-serif"
+    font-size="9.5"
+    font-weight="700"
+    text-anchor="middle"
+    letter-spacing="-0.4"
+  >NUR</text>
+</svg>

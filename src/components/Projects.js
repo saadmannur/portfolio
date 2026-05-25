@@ -1,7 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ExternalLink, Github, Code2 } from "lucide-react";
+import { ExternalLink, Code2 } from "lucide-react";
+import SocialIcon from "@/components/ui/SocialIcon";
 import SectionHeading from "@/components/ui/SectionHeading";
 import { projects } from "@/data/portfolio";
 import { fadeInUp, staggerContainer, viewport } from "@/lib/motion";
@@ -60,7 +61,7 @@ function ProjectCard({ project }) {
             whileTap={{ scale: 0.98 }}
             className="inline-flex items-center gap-2 text-sm font-medium text-muted transition-colors hover:text-foreground"
           >
-            <Github className="h-4 w-4" />
+            <SocialIcon name="github" className="h-4 w-4" />
             GitHub
           </motion.a>
         </div>

@@ -12,9 +12,46 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "Nur Uddin | Full-Stack Developer",
+  title: {
+    default: "Nur Uddin | Full-Stack Developer",
+    template: "%s | Nur Uddin",
+  },
   description:
-    "Premium developer portfolio of Nur Uddin — full-stack engineer crafting modern SaaS-grade web experiences.",
+    "Professional portfolio of Nur Uddin — full-stack developer building modern, high-performance web applications.",
+  keywords: [
+    "Nur Uddin",
+    "Full-Stack Developer",
+    "React",
+    "Next.js",
+    "Web Developer",
+    "Portfolio",
+  ],
+  authors: [{ name: "Nur Uddin" }],
+  creator: "Nur Uddin",
+  icons: {
+    icon: [{ url: "/favicon.svg", type: "image/svg+xml" }],
+    shortcut: [{ url: "/favicon.svg", type: "image/svg+xml" }],
+    apple: [{ url: "/apple-icon.svg", type: "image/svg+xml" }],
+  },
+  openGraph: {
+    title: "Nur Uddin | Full-Stack Developer",
+    description:
+      "Professional portfolio showcasing full-stack development, modern UI, and production-grade web applications.",
+    type: "website",
+    locale: "en_US",
+  },
+  twitter: {
+    card: "summary",
+    title: "Nur Uddin | Full-Stack Developer",
+    description:
+      "Professional portfolio of Nur Uddin — full-stack developer.",
+  },
+};
+
+export const viewport = {
+  themeColor: "#0f172a",
+  width: "device-width",
+  initialScale: 1,
 };
 
 export default function RootLayout({ children }) {

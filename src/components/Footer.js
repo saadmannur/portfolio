@@ -1,14 +1,9 @@
 "use client";
 
 import { motion } from "framer-motion";
-import * as LucideIcons from "lucide-react";
+import SocialIcon from "@/components/ui/SocialIcon";
 import { navLinks, site, socialLinks } from "@/data/portfolio";
 import { fadeInUp, viewport } from "@/lib/motion";
-
-function SocialIcon({ name }) {
-  const Icon = LucideIcons[name] || LucideIcons.Link;
-  return <Icon className="h-4 w-4" strokeWidth={1.75} />;
-}
 
 export default function Footer() {
   const year = new Date().getFullYear();
@@ -48,19 +43,25 @@ export default function Footer() {
           </ul>
 
           <div className="flex gap-3">
-            {socialLinks.map((link) => (
-              <motion.a
-                key={link.label}
-                href={link.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={link.label}
-                whileHover={{ scale: 1.15, y: -2 }}
-                className="flex h-9 w-9 items-center justify-center rounded-lg glass text-muted hover:text-accent"
-              >
-                <SocialIcon name={link.icon} />
-              </motion.a>
-            ))}
+            {socialLinks.map((link) => {
+              const isExternal =
+                link.external !== false && !link.href.startsWith("mailto:");
+
+              return (
+                <motion.a
+                  key={link.label}
+                  href={link.href}
+                  {...(isExternal
+                    ? { target: "_blank", rel: "noopener noreferrer" }
+                    : {})}
+                  aria-label={link.label}
+                  whileHover={{ scale: 1.15, y: -2 }}
+                  className="flex h-9 w-9 items-center justify-center rounded-lg glass text-muted hover:text-accent"
+                >
+                  <SocialIcon name={link.icon} />
+                </motion.a>
+              );
+            })}
           </div>
         </div>
 

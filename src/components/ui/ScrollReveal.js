@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { fadeInUp, viewport } from "@/lib/motion";
+import { fadeInUp, viewport, ease } from "@/lib/motion";
 
 export default function ScrollReveal({
   children,
@@ -9,13 +9,15 @@ export default function ScrollReveal({
   delay = 0,
   variant = fadeInUp,
 }) {
+  const duration = variant.visible?.transition?.duration ?? 0.65;
+
   return (
     <motion.div
       initial="hidden"
       whileInView="visible"
       viewport={viewport}
       variants={variant}
-      transition={{ delay }}
+      transition={{ delay, duration, ease }}
       className={className}
     >
       {children}

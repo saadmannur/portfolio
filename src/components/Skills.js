@@ -1,15 +1,10 @@
 "use client";
 
 import { motion } from "framer-motion";
-import * as LucideIcons from "lucide-react";
 import SectionHeading from "@/components/ui/SectionHeading";
+import SkillIcon from "@/components/ui/SkillIcon";
 import { skills } from "@/data/portfolio";
 import { fadeInUp, staggerContainer, viewport } from "@/lib/motion";
-
-function SkillIcon({ name }) {
-  const Icon = LucideIcons[name] || LucideIcons.Code2;
-  return <Icon className="h-6 w-6 text-accent" strokeWidth={1.75} />;
-}
 
 export default function Skills() {
   return (

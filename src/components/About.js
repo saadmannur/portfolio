@@ -2,12 +2,12 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { Download } from "lucide-react";
 import profileImage from "@/asset/profile.png";
+import ResumeDownloadLink from "@/components/ui/ResumeDownloadLink";
 import SectionHeading from "@/components/ui/SectionHeading";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import { site } from "@/data/portfolio";
-import { scaleIn, slideInLeft, slideInRight } from "@/lib/motion";
+import { slideInLeft, slideInRight } from "@/lib/motion";
 
 export default function About() {
   return (
@@ -41,10 +41,7 @@ export default function About() {
           </ScrollReveal>
 
           <ScrollReveal variant={slideInRight} delay={0.1}>
-            <motion.div
-              variants={scaleIn}
-              className="glass-strong rounded-3xl p-8 sm:p-10"
-            >
+            <div className="glass-strong rounded-3xl p-8 sm:p-10">
               <p className="text-lg leading-relaxed text-muted">
                 I&apos;m <span className="font-semibold text-foreground">{site.name}</span>
                 , a passionate full-stack developer based in {site.location}. I
@@ -70,17 +67,19 @@ export default function About() {
                 ))}
               </div>
 
-              <motion.a
-                href={site.resumeUrl}
-                download
+              <motion.div
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.98 }}
-                className="mt-8 inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-sky-400/20 to-violet-500/20 px-5 py-3 text-sm font-semibold text-foreground ring-1 ring-white/10 transition-all hover:ring-accent/40"
+                className="mt-8 inline-block"
               >
-                <Download className="h-4 w-4 text-accent" />
-                Download Resume
-              </motion.a>
-            </motion.div>
+                <ResumeDownloadLink
+                  showIcon
+                  className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-sky-400/20 to-violet-500/20 px-5 py-3 text-sm font-semibold text-foreground ring-1 ring-white/10 transition-all hover:ring-accent/40"
+                >
+                  Download Resume
+                </ResumeDownloadLink>
+              </motion.div>
+            </div>
           </ScrollReveal>
         </div>
       </div>

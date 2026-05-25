@@ -103,7 +103,7 @@ export default function Hero() {
             >
               <div className="absolute -inset-1 rounded-3xl bg-gradient-to-br from-sky-400 via-violet-500 to-sky-400 opacity-60 blur-md" />
               <div className="relative overflow-hidden rounded-3xl glow-ring">
-                <div className="glass-strong aspect-square">
+                <div className="relative aspect-square glass-strong">
                   <Image
                     src={profileImage}
                     alt={site.name}
@@ -120,7 +120,9 @@ export default function Hero() {
                 transition={{ delay: 0.6 }}
                 className="absolute -bottom-4 -left-4 rounded-2xl glass-strong px-5 py-3 shadow-xl sm:-left-6"
               >
-                <p className="text-2xl font-bold text-accent">5+</p>
+                <p className="text-2xl font-bold text-accent">
+                  {site.stats.find((s) => s.label === "Years")?.value ?? "4+"}
+                </p>
                 <p className="text-xs text-muted">Years Experience</p>
               </motion.div>
               <motion.div

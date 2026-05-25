@@ -2,17 +2,12 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import * as LucideIcons from "lucide-react";
 import { MapPin, Mail, Send, CheckCircle2 } from "lucide-react";
 import SectionHeading from "@/components/ui/SectionHeading";
 import ScrollReveal from "@/components/ui/ScrollReveal";
+import SocialIcon from "@/components/ui/SocialIcon";
 import { site, socialLinks } from "@/data/portfolio";
-import { fadeInUp, slideInLeft, slideInRight } from "@/lib/motion";
-
-function SocialIcon({ name }) {
-  const Icon = LucideIcons[name] || LucideIcons.Link;
-  return <Icon className="h-5 w-5" strokeWidth={1.75} />;
-}
+import { slideInLeft, slideInRight } from "@/lib/motion";
 
 export default function Contact() {
   const [submitted, setSubmitted] = useState(false);
@@ -73,28 +68,33 @@ export default function Contact() {
               </motion.div>
 
               <div className="flex gap-3">
-                {socialLinks.map((link) => (
-                  <motion.a
-                    key={link.label}
-                    href={link.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={link.label}
-                    whileHover={{ scale: 1.1, y: -4 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="flex h-12 w-12 items-center justify-center rounded-xl glass text-muted transition-colors hover:text-accent card-glow"
-                  >
-                    <SocialIcon name={link.icon} />
-                  </motion.a>
-                ))}
+                {socialLinks.map((link) => {
+                  const isExternal =
+                    link.external !== false && !link.href.startsWith("mailto:");
+
+                  return (
+                    <motion.a
+                      key={link.label}
+                      href={link.href}
+                      {...(isExternal
+                        ? { target: "_blank", rel: "noopener noreferrer" }
+                        : {})}
+                      aria-label={link.label}
+                      whileHover={{ scale: 1.1, y: -4 }}
+                      whileTap={{ scale: 0.95 }}
+                      className="flex h-12 w-12 items-center justify-center rounded-xl glass text-muted transition-colors hover:text-accent card-glow"
+                    >
+                      <SocialIcon name={link.icon} />
+                    </motion.a>
+                  );
+                })}
               </div>
             </div>
           </ScrollReveal>
 
           <ScrollReveal variant={slideInRight} delay={0.1} className="lg:col-span-3">
-            <motion.form
+            <form
               onSubmit={handleSubmit}
-              variants={fadeInUp}
               className="rounded-3xl glass-strong p-6 sm:p-8"
             >
               <div className="grid gap-6 sm:grid-cols-2">
@@ -156,7 +156,7 @@ export default function Contact() {
                   </>
                 )}
               </motion.button>
-            </motion.form>
+            </form>
           </ScrollReveal>
         </div>
       </div>

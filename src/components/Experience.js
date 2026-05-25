@@ -14,7 +14,7 @@ export default function Experience() {
       <div className="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
           label="Experience"
-          title="Where I've built & grown"
+          title="Where I&apos;ve built & grown"
           description="A timeline of roles shaping my craft in product engineering."
         />
 
@@ -23,7 +23,7 @@ export default function Experience() {
           whileInView="visible"
           viewport={viewport}
           variants={staggerContainer}
-          className="relative mx-auto max-w-3xl"
+          className="relative mx-auto max-w-3xl pl-2 sm:pl-0"
         >
           <div className="absolute top-0 bottom-0 left-[19px] w-px bg-gradient-to-b from-accent via-accent-secondary to-transparent sm:left-1/2 sm:-translate-x-px" />
 
@@ -31,8 +31,8 @@ export default function Experience() {
             <motion.div
               key={`${item.company}-${item.period}`}
               variants={fadeInUp}
-              className={`relative mb-12 flex last:mb-0 ${
-                index % 2 === 0 ? "sm:flex-row" : "sm:flex-row-reverse"
+              className={`relative mb-12 last:mb-0 sm:mb-14 ${
+                index % 2 === 0 ? "sm:flex sm:flex-row" : "sm:flex sm:flex-row-reverse"
               }`}
             >
               <div className="absolute left-0 z-10 flex h-10 w-10 items-center justify-center rounded-full glass-strong ring-4 ring-background sm:left-1/2 sm:-translate-x-1/2">
@@ -43,7 +43,7 @@ export default function Experience() {
                 className={`ml-14 w-full sm:ml-0 sm:w-[calc(50%-2.5rem)] ${
                   index % 2 === 0
                     ? "sm:pr-12 sm:text-right"
-                    : "sm:pl-12 sm:ml-auto"
+                    : "sm:pl-12 sm:ml-auto sm:text-left"
                 }`}
               >
                 <motion.div

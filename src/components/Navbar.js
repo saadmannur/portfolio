@@ -2,7 +2,8 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Download } from "lucide-react";
+import { Menu, X } from "lucide-react";
+import ResumeDownloadLink from "@/components/ui/ResumeDownloadLink";
 import { navLinks, site } from "@/data/portfolio";
 import { fadeInDown, ease } from "@/lib/motion";
 
@@ -22,6 +23,9 @@ export default function Navbar() {
       document.body.style.overflow = "";
     };
   }, [isOpen]);
+
+  const resumeLinkClass =
+    "inline-flex items-center gap-2 rounded-xl glass px-4 py-2.5 text-sm font-medium text-foreground transition-colors hover:border-accent/30";
 
   return (
     <motion.header
@@ -60,16 +64,11 @@ export default function Navbar() {
         </ul>
 
         <div className="hidden items-center gap-3 lg:flex">
-          <motion.a
-            href={site.resumeUrl}
-            download
-            whileHover={{ scale: 1.03 }}
-            whileTap={{ scale: 0.98 }}
-            className="inline-flex items-center gap-2 rounded-xl glass px-4 py-2.5 text-sm font-medium text-foreground transition-colors hover:border-accent/30"
-          >
-            <Download className="h-4 w-4 text-accent" />
-            Resume
-          </motion.a>
+          <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }}>
+            <ResumeDownloadLink showIcon className={resumeLinkClass}>
+              Resume
+            </ResumeDownloadLink>
+          </motion.div>
           <motion.a
             href="#contact"
             whileHover={{ scale: 1.03 }}
@@ -117,15 +116,13 @@ export default function Navbar() {
                 </motion.li>
               ))}
               <li className="flex gap-2 pt-2">
-                <a
-                  href={site.resumeUrl}
-                  download
-                  onClick={() => setIsOpen(false)}
-                  className="flex flex-1 items-center justify-center gap-2 rounded-xl glass px-4 py-3 text-sm font-medium"
+                <ResumeDownloadLink
+                  showIcon
+                  className={`${resumeLinkClass} flex flex-1 justify-center py-3`}
+                  onDownloadStart={() => setIsOpen(false)}
                 >
-                  <Download className="h-4 w-4 text-accent" />
                   Resume
-                </a>
+                </ResumeDownloadLink>
                 <a
                   href="#contact"
                   onClick={() => setIsOpen(false)}
