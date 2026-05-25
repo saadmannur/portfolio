@@ -69,14 +69,4 @@ export const floatAnimation = {
   },
 };
 
-export const glowPulse = {
-  opacity: [0.35, 0.65, 0.35],
-  scale: [1, 1.05, 1],
-  transition: {
-    duration: 4,
-    repeat: Infinity,
-    ease: "easeInOut",
-  },
-};
-
-export const viewport = { once: true, margin: "-80px" };
+export const viewport = { once: true, margin: "-60px" };

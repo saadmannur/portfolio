@@ -3,6 +3,8 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { MapPin, Mail, Send, CheckCircle2 } from "lucide-react";
+import Container from "@/components/ui/Container";
+import Section from "@/components/ui/Section";
 import SectionHeading from "@/components/ui/SectionHeading";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import SocialIcon from "@/components/ui/SocialIcon";
@@ -19,32 +21,32 @@ export default function Contact() {
   }
 
   return (
-    <section id="contact" className="relative py-24 sm:py-32">
+    <Section id="contact">
       <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
 
-      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <Container>
         <SectionHeading
           label="Contact"
           title="Let's build something great"
           description="Have a project in mind? I'd love to hear about it."
         />
 
-        <div className="grid gap-10 lg:grid-cols-5 lg:gap-12">
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-5 lg:gap-12">
           <ScrollReveal variant={slideInLeft} className="lg:col-span-2">
-            <div className="space-y-5">
+            <div className="space-y-4 sm:space-y-5">
               <motion.div
                 whileHover={{ y: -4 }}
-                className="rounded-2xl glass-strong p-6"
+                className="rounded-2xl glass-strong p-5 sm:p-6"
               >
-                <div className="flex items-center gap-3">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-sky-400/20">
+                <div className="flex items-start gap-3 sm:items-center">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-sky-400/20">
                     <Mail className="h-5 w-5 text-accent" />
                   </div>
-                  <div>
+                  <div className="min-w-0 flex-1">
                     <p className="text-sm text-muted">Email</p>
                     <a
                       href={`mailto:${site.email}`}
-                      className="font-medium text-foreground transition-colors hover:text-accent"
+                      className="break-all text-sm font-medium text-foreground transition-colors hover:text-accent sm:break-normal sm:text-base"
                     >
                       {site.email}
                     </a>
@@ -54,20 +56,22 @@ export default function Contact() {
 
               <motion.div
                 whileHover={{ y: -4 }}
-                className="rounded-2xl glass-strong p-6"
+                className="rounded-2xl glass-strong p-5 sm:p-6"
               >
-                <div className="flex items-center gap-3">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-violet-500/20">
+                <div className="flex items-start gap-3 sm:items-center">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-violet-500/20">
                     <MapPin className="h-5 w-5 text-accent-secondary" />
                   </div>
                   <div>
                     <p className="text-sm text-muted">Location</p>
-                    <p className="font-medium text-foreground">{site.location}</p>
+                    <p className="text-sm font-medium text-foreground sm:text-base">
+                      {site.location}
+                    </p>
                   </div>
                 </div>
               </motion.div>
 
-              <div className="flex gap-3">
+              <div className="flex flex-wrap gap-3">
                 {socialLinks.map((link) => {
                   const isExternal =
                     link.external !== false && !link.href.startsWith("mailto:");
@@ -82,7 +86,7 @@ export default function Contact() {
                       aria-label={link.label}
                       whileHover={{ scale: 1.1, y: -4 }}
                       whileTap={{ scale: 0.95 }}
-                      className="flex h-12 w-12 items-center justify-center rounded-xl glass text-muted transition-colors hover:text-accent card-glow"
+                      className="flex h-11 w-11 items-center justify-center rounded-xl glass text-muted transition-colors hover:text-accent card-glow sm:h-12 sm:w-12"
                     >
                       <SocialIcon name={link.icon} />
                     </motion.a>
@@ -95,11 +99,14 @@ export default function Contact() {
           <ScrollReveal variant={slideInRight} delay={0.1} className="lg:col-span-3">
             <form
               onSubmit={handleSubmit}
-              className="rounded-3xl glass-strong p-6 sm:p-8"
+              className="rounded-2xl glass-strong p-5 sm:rounded-3xl sm:p-6 md:p-8"
             >
-              <div className="grid gap-6 sm:grid-cols-2">
+              <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-6">
                 <div>
-                  <label htmlFor="name" className="mb-2 block text-sm font-medium text-muted">
+                  <label
+                    htmlFor="name"
+                    className="mb-2 block text-sm font-medium text-muted"
+                  >
                     Name
                   </label>
                   <input
@@ -108,11 +115,14 @@ export default function Contact() {
                     type="text"
                     required
                     placeholder="John Doe"
-                    className="w-full rounded-xl glass-input px-4 py-3.5 text-foreground placeholder:text-slate-500 transition-all focus:border-accent/50 focus:outline-none focus:ring-2 focus:ring-accent/20"
+                    className="w-full rounded-xl glass-input px-4 py-3 text-sm text-foreground placeholder:text-slate-500 transition-all focus:border-accent/50 focus:outline-none focus:ring-2 focus:ring-accent/20 sm:py-3.5 sm:text-base"
                   />
                 </div>
                 <div>
-                  <label htmlFor="email" className="mb-2 block text-sm font-medium text-muted">
+                  <label
+                    htmlFor="email"
+                    className="mb-2 block text-sm font-medium text-muted"
+                  >
                     Email
                   </label>
                   <input
@@ -121,12 +131,15 @@ export default function Contact() {
                     type="email"
                     required
                     placeholder="john@example.com"
-                    className="w-full rounded-xl glass-input px-4 py-3.5 text-foreground placeholder:text-slate-500 transition-all focus:border-accent/50 focus:outline-none focus:ring-2 focus:ring-accent/20"
+                    className="w-full rounded-xl glass-input px-4 py-3 text-sm text-foreground placeholder:text-slate-500 transition-all focus:border-accent/50 focus:outline-none focus:ring-2 focus:ring-accent/20 sm:py-3.5 sm:text-base"
                   />
                 </div>
               </div>
-              <div className="mt-6">
-                <label htmlFor="message" className="mb-2 block text-sm font-medium text-muted">
+              <div className="mt-5 sm:mt-6">
+                <label
+                  htmlFor="message"
+                  className="mb-2 block text-sm font-medium text-muted"
+                >
                   Message
                 </label>
                 <textarea
@@ -135,14 +148,14 @@ export default function Contact() {
                   rows={5}
                   required
                   placeholder="Tell me about your project..."
-                  className="w-full resize-none rounded-xl glass-input px-4 py-3.5 text-foreground placeholder:text-slate-500 transition-all focus:border-accent/50 focus:outline-none focus:ring-2 focus:ring-accent/20"
+                  className="w-full resize-none rounded-xl glass-input px-4 py-3 text-sm text-foreground placeholder:text-slate-500 transition-all focus:border-accent/50 focus:outline-none focus:ring-2 focus:ring-accent/20 sm:text-base"
                 />
               </div>
               <motion.button
                 type="submit"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-sky-400 to-violet-500 py-3.5 text-sm font-semibold text-white shadow-lg shadow-sky-500/20 sm:w-auto sm:px-10"
+                className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-sky-400 to-violet-500 py-3 text-sm font-semibold text-white shadow-lg shadow-sky-500/20 sm:mt-6 sm:w-auto sm:px-10 sm:py-3.5"
               >
                 {submitted ? (
                   <>
@@ -159,7 +172,7 @@ export default function Contact() {
             </form>
           </ScrollReveal>
         </div>
-      </div>
-    </section>
+      </Container>
+    </Section>
   );
 }

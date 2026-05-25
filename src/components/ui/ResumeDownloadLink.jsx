@@ -7,7 +7,7 @@ export default function ResumeDownloadLink({
   children,
   className = "",
   showIcon = false,
-  iconClassName = "h-4 w-4 text-accent",
+  iconClassName = "h-4 w-4 shrink-0 text-accent",
   onDownloadStart,
 }) {
   async function handleDownload(e) {

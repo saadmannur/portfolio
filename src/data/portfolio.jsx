@@ -126,7 +126,11 @@ export const experience = [
 
 export const socialLinks = [
   { label: "GitHub", href: "https://github.com/saadmannur", icon: "github" },
-  { label: "LinkedIn", href: "https://www.linkedin.com/in/saadman-noor", icon: "linkedin" },
+  {
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/in/saadman-noor",
+    icon: "linkedin",
+  },
   { label: "Twitter", href: "https://x.com/saadmannur99", icon: "twitter" },
   {
     label: "Email",

@@ -52,6 +52,7 @@ export const viewport = {
   themeColor: "#0f172a",
   width: "device-width",
   initialScale: 1,
+  maximumScale: 5,
 };
 
 export default function RootLayout({ children }) {
@@ -60,7 +61,7 @@ export default function RootLayout({ children }) {
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} scroll-smooth`}
     >
-      <body className="min-h-screen overflow-x-hidden bg-background text-foreground antialiased">
+      <body className="min-h-[100dvh] overflow-x-hidden bg-background text-foreground antialiased">
         {children}
       </body>
     </html>

@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import ResumeDownloadLink from "@/components/ui/ResumeDownloadLink";
+import Container from "@/components/ui/Container";
 import { navLinks, site } from "@/data/portfolio";
 import { fadeInDown, ease } from "@/lib/motion";
 
@@ -25,7 +26,7 @@ export default function Navbar() {
   }, [isOpen]);
 
   const resumeLinkClass =
-    "inline-flex items-center gap-2 rounded-xl glass px-4 py-2.5 text-sm font-medium text-foreground transition-colors hover:border-accent/30";
+    "inline-flex w-full items-center justify-center gap-2 rounded-xl glass px-4 py-2.5 text-sm font-medium text-foreground transition-colors hover:border-accent/30 md:w-auto";
 
   return (
     <motion.header
@@ -38,32 +39,32 @@ export default function Navbar() {
           : "bg-transparent"
       }`}
     >
-      <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:h-[4.5rem] sm:px-6 lg:px-8">
+      <Container className="flex h-14 items-center justify-between sm:h-16 md:h-[4.5rem]">
         <motion.a
           href="#home"
           whileHover={{ scale: 1.02 }}
-          className="font-mono text-lg font-semibold tracking-tight"
+          className="shrink-0 font-mono text-base font-semibold tracking-tight sm:text-lg"
         >
           <span className="text-accent">&lt;</span>
           {site.initials}
           <span className="text-accent-secondary">/&gt;</span>
         </motion.a>
 
-        <ul className="hidden items-center gap-1 lg:flex">
+        <ul className="hidden items-center gap-0.5 lg:flex xl:gap-1">
           {navLinks.map((link) => (
             <li key={link.href}>
               <a
                 href={link.href}
-                className="group relative rounded-lg px-3.5 py-2 text-sm text-muted transition-colors hover:text-foreground"
+                className="group relative rounded-lg px-3 py-2 text-sm text-muted transition-colors hover:text-foreground xl:px-3.5"
               >
                 {link.label}
-                <span className="absolute bottom-1 left-3.5 h-px w-0 bg-gradient-to-r from-accent to-accent-secondary transition-all duration-300 group-hover:w-[calc(100%-1.75rem)]" />
+                <span className="absolute bottom-1 left-3 h-px w-0 bg-gradient-to-r from-accent to-accent-secondary transition-all duration-300 group-hover:w-[calc(100%-1.5rem)] xl:left-3.5" />
               </a>
             </li>
           ))}
         </ul>
 
-        <div className="hidden items-center gap-3 lg:flex">
+        <div className="hidden items-center gap-2 md:flex md:gap-3">
           <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }}>
             <ResumeDownloadLink showIcon className={resumeLinkClass}>
               Resume
@@ -73,7 +74,7 @@ export default function Navbar() {
             href="#contact"
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.98 }}
-            className="inline-flex items-center rounded-xl bg-gradient-to-r from-sky-400 to-violet-500 px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-sky-500/20"
+            className="inline-flex items-center rounded-xl bg-gradient-to-r from-sky-400 to-violet-500 px-4 py-2.5 text-sm font-semibold text-white shadow-lg shadow-sky-500/20 sm:px-5"
           >
             Hire Me
           </motion.a>
@@ -82,12 +83,13 @@ export default function Navbar() {
         <button
           type="button"
           aria-label={isOpen ? "Close menu" : "Open menu"}
+          aria-expanded={isOpen}
           onClick={() => setIsOpen(!isOpen)}
-          className="relative z-50 flex h-10 w-10 items-center justify-center rounded-xl glass lg:hidden"
+          className="relative z-50 flex h-10 w-10 shrink-0 items-center justify-center rounded-xl glass md:hidden"
         >
           {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
         </button>
-      </nav>
+      </Container>
 
       <AnimatePresence>
         {isOpen && (
@@ -96,9 +98,9 @@ export default function Navbar() {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3, ease }}
-            className="overflow-hidden border-t border-white/10 glass lg:hidden"
+            className="max-h-[calc(100dvh-3.5rem)] overflow-y-auto border-t border-white/10 glass md:hidden"
           >
-            <ul className="flex flex-col gap-2 p-4">
+            <ul className="flex flex-col gap-2 p-4 pb-6">
               {navLinks.map((link, i) => (
                 <motion.li
                   key={link.href}
@@ -115,10 +117,10 @@ export default function Navbar() {
                   </a>
                 </motion.li>
               ))}
-              <li className="flex gap-2 pt-2">
+              <li className="flex flex-col gap-2 pt-2 sm:flex-row">
                 <ResumeDownloadLink
                   showIcon
-                  className={`${resumeLinkClass} flex flex-1 justify-center py-3`}
+                  className={`${resumeLinkClass} py-3`}
                   onDownloadStart={() => setIsOpen(false)}
                 >
                   Resume
@@ -126,7 +128,7 @@ export default function Navbar() {
                 <a
                   href="#contact"
                   onClick={() => setIsOpen(false)}
-                  className="flex flex-1 items-center justify-center rounded-xl bg-gradient-to-r from-sky-400 to-violet-500 py-3 text-sm font-semibold text-white"
+                  className="flex w-full items-center justify-center rounded-xl bg-gradient-to-r from-sky-400 to-violet-500 py-3 text-sm font-semibold text-white sm:flex-1"
                 >
                   Hire Me
                 </a>
