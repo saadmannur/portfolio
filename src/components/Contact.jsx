@@ -1,8 +1,7 @@
 "use client";
 
-import { useState } from "react";
 import { motion } from "framer-motion";
-import { MapPin, Mail, Send, CheckCircle2 } from "lucide-react";
+import { MapPin, Mail, Send } from "lucide-react";
 import Container from "@/components/ui/Container";
 import Section from "@/components/ui/Section";
 import SectionHeading from "@/components/ui/SectionHeading";
@@ -12,14 +11,6 @@ import { site, socialLinks } from "@/data/portfolio";
 import { slideInLeft, slideInRight } from "@/lib/motion";
 
 export default function Contact() {
-  const [submitted, setSubmitted] = useState(false);
-
-  function handleSubmit(e) {
-    e.preventDefault();
-    setSubmitted(true);
-    setTimeout(() => setSubmitted(false), 4000);
-  }
-
   return (
     <Section id="contact">
       <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
@@ -98,9 +89,11 @@ export default function Contact() {
 
           <ScrollReveal variant={slideInRight} delay={0.1} className="lg:col-span-3">
             <form
-              onSubmit={handleSubmit}
+              action="https://api.web3forms.com/submit"
+              method="POST"
               className="rounded-2xl glass-strong p-5 sm:rounded-3xl sm:p-6 md:p-8"
             >
+              <input type="hidden" name="access_key" value="09b294e8-21a7-4bb3-bcea-013cf9e2bece" />
               <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-6">
                 <div>
                   <label
@@ -157,19 +150,11 @@ export default function Contact() {
                 whileTap={{ scale: 0.98 }}
                 className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-sky-400 to-violet-500 py-3 text-sm font-semibold text-white shadow-lg shadow-sky-500/20 sm:mt-6 sm:w-auto sm:px-10 sm:py-3.5"
               >
-                {submitted ? (
-                  <>
-                    <CheckCircle2 className="h-4 w-4" />
-                    Message Sent!
-                  </>
-                ) : (
-                  <>
-                    <Send className="h-4 w-4" />
-                    Send Message
-                  </>
-                )}
+                <Send className="h-4 w-4" />
+                Send Message
               </motion.button>
             </form>
+    
           </ScrollReveal>
         </div>
       </Container>
