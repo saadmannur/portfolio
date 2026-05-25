@@ -1,30 +1,18 @@
 "use client";
 
 import { useState } from "react";
-import { socialLinks } from "@/data/portfolio";
+import { motion } from "framer-motion";
+import * as LucideIcons from "lucide-react";
+import { MapPin, Mail, Send, CheckCircle2 } from "lucide-react";
+import SectionHeading from "@/components/ui/SectionHeading";
+import ScrollReveal from "@/components/ui/ScrollReveal";
+import { site, socialLinks } from "@/data/portfolio";
+import { fadeInUp, slideInLeft, slideInRight } from "@/lib/motion";
 
-const icons = {
-  github: (
-    <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
-      <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
-    </svg>
-  ),
-  linkedin: (
-    <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
-      <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-    </svg>
-  ),
-  twitter: (
-    <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
-      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-    </svg>
-  ),
-  email: (
-    <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-      <path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-    </svg>
-  ),
-};
+function SocialIcon({ name }) {
+  const Icon = LucideIcons[name] || LucideIcons.Link;
+  return <Icon className="h-5 w-5" strokeWidth={1.75} />;
+}
 
 export default function Contact() {
   const [submitted, setSubmitted] = useState(false);
@@ -37,107 +25,139 @@ export default function Contact() {
 
   return (
     <section id="contact" className="relative py-24 sm:py-32">
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-border to-transparent" />
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
 
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        <div className="mb-16 text-center">
-          <h2 className="text-sm font-semibold uppercase tracking-widest text-accent">
-            Contact
-          </h2>
-          <p className="mt-3 text-3xl font-bold tracking-tight sm:text-4xl">
-            Let&apos;s work together
-          </p>
-          <p className="mx-auto mt-4 max-w-xl text-muted">
-            Have a project in mind or want to say hello? Drop me a message and
-            I&apos;ll get back to you as soon as possible.
-          </p>
-        </div>
+        <SectionHeading
+          label="Contact"
+          title="Let's build something great"
+          description="Have a project in mind? I'd love to hear about it."
+        />
 
-        <div className="grid gap-12 lg:grid-cols-5">
-          <div className="lg:col-span-2">
-            <div className="space-y-6">
-              <div className="rounded-xl border border-border bg-surface/50 p-6">
-                <h3 className="font-semibold">Email</h3>
-                <a
-                  href="mailto:hello@example.com"
-                  className="mt-2 block text-muted transition-colors hover:text-accent"
-                >
-                  hello@example.com
-                </a>
-              </div>
-              <div className="rounded-xl border border-border bg-surface/50 p-6">
-                <h3 className="font-semibold">Location</h3>
-                <p className="mt-2 text-muted">San Francisco, CA</p>
-              </div>
+        <div className="grid gap-10 lg:grid-cols-5 lg:gap-12">
+          <ScrollReveal variant={slideInLeft} className="lg:col-span-2">
+            <div className="space-y-5">
+              <motion.div
+                whileHover={{ y: -4 }}
+                className="rounded-2xl glass-strong p-6"
+              >
+                <div className="flex items-center gap-3">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-sky-400/20">
+                    <Mail className="h-5 w-5 text-accent" />
+                  </div>
+                  <div>
+                    <p className="text-sm text-muted">Email</p>
+                    <a
+                      href={`mailto:${site.email}`}
+                      className="font-medium text-foreground transition-colors hover:text-accent"
+                    >
+                      {site.email}
+                    </a>
+                  </div>
+                </div>
+              </motion.div>
+
+              <motion.div
+                whileHover={{ y: -4 }}
+                className="rounded-2xl glass-strong p-6"
+              >
+                <div className="flex items-center gap-3">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-violet-500/20">
+                    <MapPin className="h-5 w-5 text-accent-secondary" />
+                  </div>
+                  <div>
+                    <p className="text-sm text-muted">Location</p>
+                    <p className="font-medium text-foreground">{site.location}</p>
+                  </div>
+                </div>
+              </motion.div>
+
               <div className="flex gap-3">
                 {socialLinks.map((link) => (
-                  <a
+                  <motion.a
                     key={link.label}
                     href={link.href}
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={link.label}
-                    className="flex h-11 w-11 items-center justify-center rounded-lg border border-border bg-surface text-muted transition-all hover:border-accent/50 hover:text-accent hover:scale-110"
+                    whileHover={{ scale: 1.1, y: -4 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="flex h-12 w-12 items-center justify-center rounded-xl glass text-muted transition-colors hover:text-accent card-glow"
                   >
-                    {icons[link.icon]}
-                  </a>
+                    <SocialIcon name={link.icon} />
+                  </motion.a>
                 ))}
               </div>
             </div>
-          </div>
+          </ScrollReveal>
 
-          <form
-            onSubmit={handleSubmit}
-            className="lg:col-span-3 rounded-2xl border border-border bg-surface/50 p-6 sm:p-8"
-          >
-            <div className="grid gap-6 sm:grid-cols-2">
-              <div>
-                <label htmlFor="name" className="mb-2 block text-sm font-medium">
-                  Name
-                </label>
-                <input
-                  id="name"
-                  name="name"
-                  type="text"
-                  required
-                  placeholder="John Doe"
-                  className="w-full rounded-lg border border-border bg-background px-4 py-3 text-foreground placeholder:text-zinc-600 transition-colors focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent"
-                />
-              </div>
-              <div>
-                <label htmlFor="email" className="mb-2 block text-sm font-medium">
-                  Email
-                </label>
-                <input
-                  id="email"
-                  name="email"
-                  type="email"
-                  required
-                  placeholder="john@example.com"
-                  className="w-full rounded-lg border border-border bg-background px-4 py-3 text-foreground placeholder:text-zinc-600 transition-colors focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent"
-                />
-              </div>
-            </div>
-            <div className="mt-6">
-              <label htmlFor="message" className="mb-2 block text-sm font-medium">
-                Message
-              </label>
-              <textarea
-                id="message"
-                name="message"
-                rows={5}
-                required
-                placeholder="Tell me about your project..."
-                className="w-full resize-none rounded-lg border border-border bg-background px-4 py-3 text-foreground placeholder:text-zinc-600 transition-colors focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent"
-              />
-            </div>
-            <button
-              type="submit"
-              className="mt-6 w-full rounded-xl bg-gradient-to-r from-cyan-500 to-indigo-500 py-3.5 font-medium text-white transition-all hover:scale-[1.02] hover:shadow-lg hover:shadow-cyan-500/25 sm:w-auto sm:px-10"
+          <ScrollReveal variant={slideInRight} delay={0.1} className="lg:col-span-3">
+            <motion.form
+              onSubmit={handleSubmit}
+              variants={fadeInUp}
+              className="rounded-3xl glass-strong p-6 sm:p-8"
             >
-              {submitted ? "Message Sent!" : "Send Message"}
-            </button>
-          </form>
+              <div className="grid gap-6 sm:grid-cols-2">
+                <div>
+                  <label htmlFor="name" className="mb-2 block text-sm font-medium text-muted">
+                    Name
+                  </label>
+                  <input
+                    id="name"
+                    name="name"
+                    type="text"
+                    required
+                    placeholder="John Doe"
+                    className="w-full rounded-xl glass-input px-4 py-3.5 text-foreground placeholder:text-slate-500 transition-all focus:border-accent/50 focus:outline-none focus:ring-2 focus:ring-accent/20"
+                  />
+                </div>
+                <div>
+                  <label htmlFor="email" className="mb-2 block text-sm font-medium text-muted">
+                    Email
+                  </label>
+                  <input
+                    id="email"
+                    name="email"
+                    type="email"
+                    required
+                    placeholder="john@example.com"
+                    className="w-full rounded-xl glass-input px-4 py-3.5 text-foreground placeholder:text-slate-500 transition-all focus:border-accent/50 focus:outline-none focus:ring-2 focus:ring-accent/20"
+                  />
+                </div>
+              </div>
+              <div className="mt-6">
+                <label htmlFor="message" className="mb-2 block text-sm font-medium text-muted">
+                  Message
+                </label>
+                <textarea
+                  id="message"
+                  name="message"
+                  rows={5}
+                  required
+                  placeholder="Tell me about your project..."
+                  className="w-full resize-none rounded-xl glass-input px-4 py-3.5 text-foreground placeholder:text-slate-500 transition-all focus:border-accent/50 focus:outline-none focus:ring-2 focus:ring-accent/20"
+                />
+              </div>
+              <motion.button
+                type="submit"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-sky-400 to-violet-500 py-3.5 text-sm font-semibold text-white shadow-lg shadow-sky-500/20 sm:w-auto sm:px-10"
+              >
+                {submitted ? (
+                  <>
+                    <CheckCircle2 className="h-4 w-4" />
+                    Message Sent!
+                  </>
+                ) : (
+                  <>
+                    <Send className="h-4 w-4" />
+                    Send Message
+                  </>
+                )}
+              </motion.button>
+            </motion.form>
+          </ScrollReveal>
         </div>
       </div>
     </section>

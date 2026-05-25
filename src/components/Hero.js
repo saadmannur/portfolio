@@ -1,68 +1,154 @@
+"use client";
+
+import Image from "next/image";
+import { motion } from "framer-motion";
+import { ArrowRight, ChevronDown, Sparkles } from "lucide-react";
+import profileImage from "@/asset/profile.png";
+import FloatingOrbs from "@/components/ui/FloatingOrbs";
+import { site } from "@/data/portfolio";
+import {
+  fadeInUp,
+  slideInLeft,
+  slideInRight,
+  staggerContainer,
+  floatAnimation,
+} from "@/lib/motion";
+
 export default function Hero() {
   return (
     <section
       id="home"
-      className="relative flex min-h-screen items-center justify-center overflow-hidden pt-16"
+      className="relative flex min-h-screen items-center overflow-hidden pt-20 mesh-gradient"
     >
-      <div className="pointer-events-none absolute inset-0 grid-pattern opacity-40" />
-      <div className="pointer-events-none absolute top-1/4 left-1/2 h-[500px] w-[500px] -translate-x-1/2 rounded-full bg-cyan-500/10 blur-[120px] animate-pulse-glow" />
-      <div className="pointer-events-none absolute right-0 bottom-1/4 h-[300px] w-[300px] rounded-full bg-indigo-500/10 blur-[100px]" />
+      <div className="pointer-events-none absolute inset-0 grid-overlay opacity-60" />
+      <FloatingOrbs />
 
-      <div className="relative z-10 mx-auto max-w-6xl px-4 py-20 text-center sm:px-6 lg:px-8">
-        <p className="animate-fade-in-up opacity-0-start mb-4 inline-flex items-center gap-2 rounded-full border border-border bg-surface/80 px-4 py-1.5 text-sm text-muted">
-          <span className="relative flex h-2 w-2">
-            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
-            <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
-          </span>
-          Available for new opportunities
-        </p>
-
-        <h1 className="animate-fade-in-up opacity-0-start animation-delay-100 text-4xl font-bold tracking-tight sm:text-6xl lg:text-7xl">
-          Hi, I&apos;m{" "}
-          <span className="text-gradient animate-gradient">Alex Morgan</span>
-        </h1>
-
-        <p className="animate-fade-in-up opacity-0-start animation-delay-200 mx-auto mt-6 max-w-2xl text-lg text-muted sm:text-xl">
-          Full-stack developer crafting fast, accessible, and beautiful web
-          experiences with React, Next.js, and modern tooling.
-        </p>
-
-        <div className="animate-fade-in-up opacity-0-start animation-delay-300 mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-          <a
-            href="#projects"
-            className="group inline-flex h-12 min-w-[180px] items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-cyan-500 to-indigo-500 px-8 font-medium text-white shadow-lg shadow-cyan-500/25 transition-all hover:scale-105 hover:shadow-cyan-500/40"
+      <div className="relative z-10 mx-auto w-full max-w-6xl px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
+        <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
+          <motion.div
+            variants={staggerContainer}
+            initial="hidden"
+            animate="visible"
+            className="text-center lg:text-left"
           >
-            View My Work
-            <svg
-              className="h-4 w-4 transition-transform group-hover:translate-x-1"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              strokeWidth={2}
+            <motion.div
+              variants={fadeInUp}
+              className="mb-6 inline-flex items-center gap-2 rounded-full glass px-4 py-2 text-sm text-muted"
             >
-              <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-            </svg>
-          </a>
-          <a
-            href="#contact"
-            className="inline-flex h-12 min-w-[180px] items-center justify-center rounded-xl border border-border bg-surface px-8 font-medium transition-all hover:border-accent/50 hover:bg-surface/80"
+              <Sparkles className="h-4 w-4 text-accent" />
+              <span className="relative flex h-2 w-2">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-60" />
+                <span className="relative h-2 w-2 rounded-full bg-emerald-400" />
+              </span>
+              Available for new opportunities
+            </motion.div>
+
+            <motion.p
+              variants={slideInLeft}
+              className="text-sm font-medium uppercase tracking-[0.25em] text-muted"
+            >
+              {site.role}
+            </motion.p>
+
+            <motion.h1
+              variants={fadeInUp}
+              className="mt-4 text-4xl font-bold leading-[1.1] tracking-tight sm:text-5xl lg:text-6xl xl:text-7xl"
+            >
+              Building digital products with{" "}
+              <span className="text-gradient-animated">precision</span> &amp;{" "}
+              <span className="text-gradient">craft</span>
+            </motion.h1>
+
+            <motion.p
+              variants={fadeInUp}
+              className="mx-auto mt-6 max-w-xl text-base leading-relaxed text-muted sm:text-lg lg:mx-0"
+            >
+              Hi, I&apos;m <span className="font-semibold text-foreground">{site.name}</span>
+              — {site.tagline}
+            </motion.p>
+
+            <motion.div
+              variants={fadeInUp}
+              className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row lg:justify-start"
+            >
+              <motion.a
+                href="#projects"
+                whileHover={{ scale: 1.04 }}
+                whileTap={{ scale: 0.98 }}
+                className="group inline-flex h-12 min-w-[200px] items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-sky-400 to-violet-500 px-8 text-sm font-semibold text-white shadow-xl shadow-sky-500/25"
+              >
+                View My Work
+                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+              </motion.a>
+              <motion.a
+                href="#contact"
+                whileHover={{ scale: 1.04 }}
+                whileTap={{ scale: 0.98 }}
+                className="inline-flex h-12 min-w-[200px] items-center justify-center rounded-xl glass px-8 text-sm font-semibold transition-colors hover:border-accent/40"
+              >
+                Get In Touch
+              </motion.a>
+            </motion.div>
+          </motion.div>
+
+          <motion.div
+            variants={slideInRight}
+            initial="hidden"
+            animate="visible"
+            className="relative mx-auto w-full max-w-md lg:max-w-none"
           >
-            Get In Touch
-          </a>
+            <motion.div
+              animate={floatAnimation}
+              className="relative mx-auto aspect-square w-full max-w-[340px] sm:max-w-[380px] lg:max-w-[420px]"
+            >
+              <div className="absolute -inset-1 rounded-3xl bg-gradient-to-br from-sky-400 via-violet-500 to-sky-400 opacity-60 blur-md" />
+              <div className="relative overflow-hidden rounded-3xl glow-ring">
+                <div className="glass-strong aspect-square">
+                  <Image
+                    src={profileImage}
+                    alt={site.name}
+                    fill
+                    priority
+                    className="object-cover"
+                    sizes="(max-width: 768px) 340px, 420px"
+                  />
+                </div>
+              </div>
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.6 }}
+                className="absolute -bottom-4 -left-4 rounded-2xl glass-strong px-5 py-3 shadow-xl sm:-left-6"
+              >
+                <p className="text-2xl font-bold text-accent">5+</p>
+                <p className="text-xs text-muted">Years Experience</p>
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.75 }}
+                className="absolute -top-2 -right-2 rounded-2xl glass-strong px-4 py-2 sm:-right-4"
+              >
+                <p className="text-sm font-semibold text-foreground">Full-Stack</p>
+                <p className="text-xs text-muted">Developer</p>
+              </motion.div>
+            </motion.div>
+          </motion.div>
         </div>
 
-        <div className="animate-fade-in-up opacity-0-start animation-delay-500 mt-20 flex justify-center">
-          <a
-            href="#about"
-            className="animate-float flex flex-col items-center gap-2 text-muted transition-colors hover:text-foreground"
-            aria-label="Scroll to about section"
-          >
-            <span className="text-xs uppercase tracking-widest">Scroll</span>
-            <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-            </svg>
-          </a>
-        </div>
+        <motion.a
+          href="#about"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1 }}
+          className="mt-16 flex flex-col items-center gap-2 text-muted transition-colors hover:text-accent lg:mt-20"
+          aria-label="Scroll to about"
+        >
+          <span className="text-xs uppercase tracking-widest">Scroll</span>
+          <motion.div animate={{ y: [0, 6, 0] }} transition={{ repeat: Infinity, duration: 1.5 }}>
+            <ChevronDown className="h-5 w-5" />
+          </motion.div>
+        </motion.a>
       </div>
     </section>
   );

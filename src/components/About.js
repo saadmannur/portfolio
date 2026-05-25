@@ -1,71 +1,87 @@
+"use client";
+
+import Image from "next/image";
+import { motion } from "framer-motion";
+import { Download } from "lucide-react";
+import profileImage from "@/asset/profile.png";
+import SectionHeading from "@/components/ui/SectionHeading";
+import ScrollReveal from "@/components/ui/ScrollReveal";
+import { site } from "@/data/portfolio";
+import { scaleIn, slideInLeft, slideInRight } from "@/lib/motion";
+
 export default function About() {
   return (
     <section id="about" className="relative py-24 sm:py-32">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        <div className="mb-16 text-center">
-          <h2 className="text-sm font-semibold uppercase tracking-widest text-accent">
-            About Me
-          </h2>
-          <p className="mt-3 text-3xl font-bold tracking-tight sm:text-4xl">
-            Turning ideas into digital reality
-          </p>
-        </div>
+        <SectionHeading
+          label="About"
+          title="Crafting experiences that feel effortless"
+          description="A developer who cares about performance, accessibility, and every pixel in between."
+        />
 
-        <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
-          <div className="relative mx-auto w-full max-w-sm lg:mx-0">
-            <div className="absolute -inset-4 rounded-2xl bg-gradient-to-br from-cyan-500/20 to-indigo-500/20 blur-2xl" />
-            <div className="relative aspect-square overflow-hidden rounded-2xl border border-border bg-surface">
-              <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-zinc-800 to-zinc-900">
-                <span className="font-mono text-7xl font-bold text-gradient sm:text-8xl">
-                  AM
-                </span>
-              </div>
-            </div>
-            <div className="absolute -right-4 -bottom-4 rounded-xl border border-border bg-surface px-4 py-3 shadow-xl">
-              <p className="text-2xl font-bold text-accent">5+</p>
-              <p className="text-sm text-muted">Years Experience</p>
-            </div>
-          </div>
-
-          <div className="space-y-6">
-            <p className="text-lg leading-relaxed text-muted">
-              I&apos;m a passionate full-stack developer based in San Francisco,
-              specializing in building exceptional digital experiences. From
-              pixel-perfect interfaces to scalable backend systems, I love
-              solving complex problems with clean, maintainable code.
-            </p>
-            <p className="text-lg leading-relaxed text-muted">
-              When I&apos;m not coding, you&apos;ll find me contributing to open
-              source, mentoring junior developers, or exploring the latest in
-              web performance and accessibility standards.
-            </p>
-
-            <div className="grid grid-cols-2 gap-4 pt-4 sm:grid-cols-3">
-              {[
-                { label: "Projects", value: "40+" },
-                { label: "Clients", value: "25+" },
-                { label: "Coffee", value: "∞" },
-              ].map((stat) => (
-                <div
-                  key={stat.label}
-                  className="rounded-xl border border-border bg-surface/50 p-4 text-center transition-colors hover:border-accent/30"
-                >
-                  <p className="text-2xl font-bold text-foreground">{stat.value}</p>
-                  <p className="text-sm text-muted">{stat.label}</p>
-                </div>
-              ))}
-            </div>
-
-            <a
-              href="/resume.pdf"
-              className="inline-flex items-center gap-2 rounded-lg border border-border px-5 py-2.5 text-sm font-medium transition-colors hover:border-accent/50 hover:text-accent"
+        <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-14">
+          <ScrollReveal variant={slideInLeft}>
+            <motion.div
+              whileHover={{ scale: 1.01 }}
+              className="relative mx-auto max-w-md lg:mx-0"
             >
-              <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-              </svg>
-              Download Resume
-            </a>
-          </div>
+              <div className="absolute -inset-3 rounded-3xl bg-gradient-to-br from-sky-400/20 to-violet-500/20 blur-2xl" />
+              <div className="glass-strong relative overflow-hidden rounded-3xl p-2">
+                <div className="relative aspect-[4/5] overflow-hidden rounded-2xl">
+                  <Image
+                    src={profileImage}
+                    alt={site.name}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 1024px) 100vw, 480px"
+                  />
+                </div>
+              </div>
+            </motion.div>
+          </ScrollReveal>
+
+          <ScrollReveal variant={slideInRight} delay={0.1}>
+            <motion.div
+              variants={scaleIn}
+              className="glass-strong rounded-3xl p-8 sm:p-10"
+            >
+              <p className="text-lg leading-relaxed text-muted">
+                I&apos;m <span className="font-semibold text-foreground">{site.name}</span>
+                , a passionate full-stack developer based in {site.location}. I
+                specialize in building premium web applications — from polished
+                interfaces to scalable backend systems.
+              </p>
+              <p className="mt-5 text-lg leading-relaxed text-muted">
+                When I&apos;m not coding, I contribute to open source, mentor
+                developers, and stay current with web performance and
+                accessibility standards.
+              </p>
+
+              <div className="mt-8 grid grid-cols-3 gap-3">
+                {site.stats.map((stat) => (
+                  <motion.div
+                    key={stat.label}
+                    whileHover={{ y: -4 }}
+                    className="rounded-2xl glass p-4 text-center card-glow transition-shadow"
+                  >
+                    <p className="text-2xl font-bold text-gradient">{stat.value}</p>
+                    <p className="mt-1 text-xs text-muted">{stat.label}</p>
+                  </motion.div>
+                ))}
+              </div>
+
+              <motion.a
+                href={site.resumeUrl}
+                download
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.98 }}
+                className="mt-8 inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-sky-400/20 to-violet-500/20 px-5 py-3 text-sm font-semibold text-foreground ring-1 ring-white/10 transition-all hover:ring-accent/40"
+              >
+                <Download className="h-4 w-4 text-accent" />
+                Download Resume
+              </motion.a>
+            </motion.div>
+          </ScrollReveal>
         </div>
       </div>
     </section>

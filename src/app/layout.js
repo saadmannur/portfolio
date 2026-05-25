@@ -12,9 +12,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "Alex Morgan | Full-Stack Developer",
+  title: "Nur Uddin | Full-Stack Developer",
   description:
-    "Portfolio of Alex Morgan — full-stack developer building modern web applications with React, Next.js, and Node.js.",
+    "Premium developer portfolio of Nur Uddin — full-stack engineer crafting modern SaaS-grade web experiences.",
 };
 
 export default function RootLayout({ children }) {
@@ -23,7 +23,7 @@ export default function RootLayout({ children }) {
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} scroll-smooth`}
     >
-      <body className="min-h-screen bg-background text-foreground antialiased">
+      <body className="min-h-screen overflow-x-hidden bg-background text-foreground antialiased">
         {children}
       </body>
     </html>
